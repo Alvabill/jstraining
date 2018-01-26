@@ -11,9 +11,15 @@ router.use(function(req, res, next) {
   console.log('There is a requesting.');
   next();
 });
+router.use(function(req, res, next){
+	var newDate = new Date();
+	newDate.setTime(Date.now());
+	console.log('Time: %s', newDate.toGMTString());
+	next();
+});
 
 router.get('/', function(req, res) {
-  res.send('<h1>Hello World</h1>');
+  res.send('<h1>Hello '+req.query.name+'</h1>');
 });
 
 router.get('/:name', function(req, res) {
